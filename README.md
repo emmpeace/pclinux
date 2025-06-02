@@ -24,4 +24,12 @@ https://askubuntu.com/questions/1401737/couldnt-create-moklist-volume-full-grub-
 Choices: 
 - OS: Lubuntu 24.04
 
-
+what i did
+- install ansible
+https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu
+```
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible
+```
