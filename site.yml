@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  roles:
+    - programs_install
+  become: true
+  become_method: sudo

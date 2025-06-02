@@ -1,0 +1,4 @@
+---
+- name: Basic installs
+  import_tasks: basic_installs.yml
+
