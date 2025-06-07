@@ -4,7 +4,10 @@ my journey from Windows to Linux
 So this June 2025 and Windows 10 is coming to its end ... <br>
 Like Pewdiepie, My 8 years desktop PC is going to Linux <br><br>
 
-Problems I ran into:
+## Notes for this playbook:
+1. you will have to set your other partitions in group_vars/all<br>
+
+## Problems I ran into:
 1. Deactivate Bitlocker on my other disk
 
 I had to deactivate bilocker
@@ -21,10 +24,10 @@ https://askubuntu.com/questions/1401737/couldnt-create-moklist-volume-full-grub-
 
 ---
 
-Choices: 
+## Choices: 
 - OS: Lubuntu 24.04<br>
 
-what i did<br>
+## what i did<br>
 - install ansible<br>
 https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu<br>
 ```

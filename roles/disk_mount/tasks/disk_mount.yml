@@ -1,0 +1,27 @@
+---
+## Maybe I'll find a use for it.... or not ...
+# - name: Get unmounted devices UUID
+#   ansible.builtin.shell: lsblk -dn /dev/sd?? -o MOUNTPOINT,UUID  | grep -vE '/|loop'
+#   register: devices_output
+#   changed_when: false
+
+# - name: Get unmounted devices labels
+#   ansible.builtin.shell: lsblk -dn /dev/sd?? -o MOUNTPOINT,LABEL  | grep -vE '/|loop'
+#   register: devices_output
+#   changed_when: false
+
+# Variables in group_vars/all
+- name: Create mount point directory for {{ item.label }}
+  file:
+    path: /mnt/{{ item.label }}
+    state: directory
+    mode: '0777'
+  loop: "{{ disks_to_mount }}"
+
+- name: Edit fstab
+  lineinfile:
+    path: /etc/fstab
+    line: UUID={{ item.uuid }}	/mnt/{{ item.label }}	{{ item.type }}	defaults	0 0
+    backup: true
+  loop: "{{ disks_to_mount }}"
+  notify: mount_all_fstab

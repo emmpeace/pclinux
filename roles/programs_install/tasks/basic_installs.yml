@@ -5,6 +5,17 @@
     state: latest
     update_cache: yes
 
+
+- name: Download sublime text gpg key
+  ansible.builtin.get_url:
+    url: https://download.sublimetext.com/sublimehq-pub.gpg
+    dest: /etc/apt/keyrings/sublimehq-pub.asc
+      
+- name: Set Sources list for sublime text
+  copy: 
+    src: sublime-text.sources
+    dest: /etc/apt/sources.list.d/sublime-text.sources
+
 - name: Install basics programs
   apt:
     name: "{{ item }}"
@@ -12,3 +23,9 @@
     update_cache: yes
   loop:
     - "keepassxc"
+    - "clementine"
+    - "sublime-text"
+    - "sublime-merge"
+    - "libvisual-projectm"
+    - "sl"
+
