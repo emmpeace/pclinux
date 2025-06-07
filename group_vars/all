@@ -1,0 +1,7 @@
+# Check your label, type and uuid with: lsblk -dn /dev/sd?? -o MOUNTPOINT,UUID,FSTYPE,LABEL  | grep -vE '/|loop'
+# For nfs you probably know what to do ... 
+
+disks_to_mount:
+  - uuid: 3CFC6492FC6447EA
+    label: local_toshiba
+    type: ntfs3
