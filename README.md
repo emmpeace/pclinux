@@ -6,6 +6,7 @@ Like Pewdiepie, My 8 years desktop PC is going to Linux <br><br>
 
 ## Notes for this playbook:
 1. you will have to set your other partitions in group_vars/all<br>
+2. This playbook edit /etc/fstab so please check yours disks settings
 
 ## Problems I ran into:
 1. Deactivate Bitlocker on my other disk
