@@ -16,6 +16,15 @@
     src: sublime-text.sources
     dest: /etc/apt/sources.list.d/sublime-text.sources
 
+- name: Download Projectm for visualizations
+  get_url:
+    url: https://github.com/kblaschke/frontend-sdl2/releases/download/2.0-linux-pre2/projectMSDL-2.0.0-Linux-x86_64.deb
+    dest: /tmp/projectMSDL-2.0.0-Linux-x86_64.deb
+
+- name: Install projectm
+  apt:
+    deb: /tmp/projectMSDL-2.0.0-Linux-x86_64.deb
+
 - name: Install basics programs
   apt:
     name: "{{ item }}"
@@ -26,6 +35,8 @@
     - "clementine"
     - "sublime-text"
     - "sublime-merge"
-    - "libvisual-projectm"
     - "sl"
+    - "rygel"
+
+
 
