@@ -1,0 +1,29 @@
+- name: Download Opera GPG key
+  get_url:
+    url: https://deb.opera.com/archive.key
+    dest: /tmp/opera-archive-key.asc
+    mode: '0644'
+    checksum: sha256:c9201811b767dff60df9fc6e23087ab027ef014cbafec6bc01417e45b6574ac7
+  register: opera_key_download
+
+- name: Add Opera GPG key to apt keyrings
+  shell: |
+    gpg --dearmor -o /etc/apt/keyrings/opera.gpg {{ opera_key_download.dest }}
+    chmod 644 /etc/apt/keyrings/opera.gpg
+  args:
+    creates: /etc/apt/keyrings/opera.gpg # Idempotent check
+  # The apt_key module is deprecated for newer Debian/Ubuntu.
+  # Using shell with gpg --dearmor is the recommended modern approach.
+  # See: https://wiki.debian.org/DebianRepository/UseThirdParty#Adding_a_key_to_apt-key
+
+- name: Add Opera APT repository
+  apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/opera.gpg] https://deb.opera.com/opera-stable/ stable non-free"
+    state: present
+    filename: opera
+    update_cache: yes
+
+- name: Install Opera stable
+  apt:
+    name: opera-stable
+    state: present

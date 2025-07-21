@@ -2,3 +2,8 @@
 - name: Basic installs
   import_tasks: basic_installs.yml
 
+- name: Opera browser
+  import_tasks: opera.yml
+
+- name: Rygel
+  import_tasks: rygel.yml
