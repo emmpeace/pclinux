@@ -7,3 +7,8 @@
 
 - name: Rygel
   import_tasks: rygel.yml
+  tags: rygel
+
+- name: ssh
+  import_tasks: ssh.yml
+  tags: ssh

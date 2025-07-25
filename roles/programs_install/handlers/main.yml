@@ -1,5 +1,10 @@
 - name: Restart Rygel service takes time dpending on number of files
-  ansible.builtin.systemd:
+  systemd:
     name: rygel.service
     state: restarted
   listen: "Restart Rygel service"
+
+- name: Restart SSH service
+  systemd:
+    name: sshd
+    state: restarted
