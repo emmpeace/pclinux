@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: my_hosts, localhost
   roles:
     - programs_install
     - disk_mount

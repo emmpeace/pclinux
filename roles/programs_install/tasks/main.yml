@@ -14,3 +14,7 @@
 - name: ssh
   import_tasks: ssh.yml
   tags: ssh
+
+- name: ipv6_disable
+  import_tasks: ipv6_disable.yml
+  tags: ipv6_disable
