@@ -5,3 +5,7 @@ disks_to_mount:
   - uuid: 3CFC6492FC6447EA
     label: local_toshiba
     type: ntfs3
+
+computer_user: user1
+ssh_port: 2222
+ssh_pub_key: ""

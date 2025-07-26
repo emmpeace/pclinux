@@ -1,0 +1,12 @@
+[Unit]
+Description=Rygel DLNA/UPnP server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/rygel
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+# https://gitlab.gnome.org/GNOME/rygel/-/raw/master/data/rygel.service.in?ref_type=heads

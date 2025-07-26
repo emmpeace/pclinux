@@ -1,0 +1,13 @@
+---
+# configure rygel for media streaming
+
+- name: Set rygel in systemd
+  copy:
+    src: rygel.service
+    dest: /lib/systemd/system/rygel.service
+
+- name: Configure rygel.conf
+  template:
+    src: rygel.conf.j2
+    dest: "/home/{{ computer_user }}/.config/rygel.conf"
+

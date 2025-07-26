@@ -1,0 +1,30 @@
+---
+- name: Ensure openssh-server package is installed
+  apt:
+    name: openssh-server
+    state: present
+
+- name: Ensure ssh service is running and enabled
+  systemd:
+    name: ssh
+    state: started
+    enabled: yes
+
+- name: Configure SSH daemon (sshd_config.d/)
+  template:
+    src: sshd_custom.conf.j2
+    dest: /etc/ssh/sshd_config.d/sshd_custom.conf
+  notify: Restart SSH service
+
+- name: Add SSH port to UFW (if UFW is active)
+  ufw:
+    rule: allow
+    port: "{{ ssh_port }}"
+    proto: tcp
+  ignore_errors: yes # Ignore if UFW is not installed or enabled
+
+- name: Add SSH public key to authorized_keys for set user
+  authorized_key:
+    user: "{{ computer_user }}"
+    state: present
+    key: "{{ ssh_pub_key }}"

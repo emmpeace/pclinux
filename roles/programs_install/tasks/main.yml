@@ -1,4 +1,20 @@
 ---
 - name: Basic installs
   import_tasks: basic_installs.yml
+  tags: basic_installs
 
+- name: Opera browser
+  import_tasks: opera.yml
+  tags: basic_installs
+
+- name: Rygel
+  import_tasks: rygel.yml
+  tags: rygel
+
+- name: ssh
+  import_tasks: ssh.yml
+  tags: ssh
+
+- name: ipv6_disable
+  import_tasks: ipv6_disable.yml
+  tags: ipv6_disable

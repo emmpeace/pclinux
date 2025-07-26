@@ -1,0 +1,13 @@
+- name: Restart Rygel service takes time dpending on number of files
+  systemd:
+    name: rygel.service
+    state: restarted
+  listen: "Restart Rygel service"
+
+- name: Restart SSH service
+  systemd:
+    name: sshd
+    state: restarted
+
+- name: apply systcl
+  command: sysctl -p /etc/sysctl.d/99-disable-ipv6.conf
