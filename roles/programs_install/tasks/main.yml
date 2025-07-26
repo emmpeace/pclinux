@@ -1,9 +1,11 @@
 ---
 - name: Basic installs
   import_tasks: basic_installs.yml
+  tags: basic_installs
 
 - name: Opera browser
   import_tasks: opera.yml
+  tags: basic_installs
 
 - name: Rygel
   import_tasks: rygel.yml
