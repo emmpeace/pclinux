@@ -3,6 +3,7 @@ Description=Rygel DLNA/UPnP server
 After=network.target
 
 [Service]
+User={{ computer_user}}
 ExecStart=/usr/bin/rygel
 Restart=on-failure
 

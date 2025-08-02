@@ -2,7 +2,7 @@
 # configure rygel for media streaming
 
 - name: Set rygel in systemd
-  copy:
+  template:
     src: rygel.service
     dest: /lib/systemd/system/rygel.service
 
