@@ -1,0 +1,65 @@
+---
+# - name: Ensure Docker SDK for Python is installed
+#   pip:
+#     name: docker
+#     state: present
+#python3-docker
+
+- name: Ensure the Owntone user and group exist
+  user:
+    name: "{{ owntone_usr }}"
+    uid: "{{ owntone_uid }}"
+    shell: /sbin/nologin
+    create_home: no
+    state: present
+
+- name: Create directories for persistent data
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ owntone_usr }}"
+    group: "{{ owntone_usr }}"
+    mode: '0755'
+  loop:
+    - "{{ media_path }}"
+    - "{{ config_path }}"
+    - "{{ database_path }}"
+
+- name: Send owntone conf file
+  copy:
+    src: owntone.conf
+    dest: "{{ config_path }}/owntone.conf"
+    mode: 0755
+    owner: "{{ owntone_usr }}"
+
+- name: Pull the Owntone Docker image
+  community.docker.docker_image:
+    name: "{{ owntone_image_name }}"
+    source: pull
+    state: present
+
+- name: Run the Owntone container
+  community.docker.docker_container:
+    name: "{{ owntone_container_name }}"
+    image: "{{ owntone_image_name }}"
+    restart_policy: "always"
+    state: started
+    # Use host network mode for AirPlay and other discovery services to work correctly
+    network_mode: "host"
+    # Mount host directories to the container for persistence
+    volumes:
+      - "{{ my_zic }}:/srv/media"
+      - "{{ config_path }}:/etc/owntone"
+      - "{{ database_path }}:/var/cache/owntone"
+    env:
+      # This configures the Owntone service inside the container
+      # You can add more environment variables as needed
+      UID: "{{ owntone_uid }}"
+      GID: "{{ owntone_gid }}"
+      OWNTONE_PASSWORD: "a_secure_password" # Change this to a secure password
+    # Ports are not needed with `network_mode: host` but would be required
+    # for `network_mode: bridge`
+    ports:
+      - "3689:3689" # DAAP service
+      - "8080:8080" # Web interface (if enabled)
+      - "5353:5353/udp" # mDNS (AirPlay discovery)

@@ -9,3 +9,19 @@ disks_to_mount:
 computer_user: user1
 ssh_port: 2222
 ssh_pub_key: ""
+
+my_zic: /mnt/local_toshiba/stuffs/All_Music
+my_pics: /mnt/local_toshiba/stuffs/All_Pictures
+my_vids: /mnt/local_toshiba/stuffs/All_Videos
+
+#Owntone
+owntone_container_name: "owntone-server"
+owntone_image_name: "owntone/owntone:latest"
+# User to own the media and database directories
+owntone_usr: "owntone"
+owntone_uid: "1001"
+owntone_gid: "1001"
+# Paths on the host machine for persistent data
+media_path: "/srv/owntone/media"
+config_path: "/srv/owntone/config"
+database_path: "/srv/owntone/database"
