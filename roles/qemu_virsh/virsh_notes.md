@@ -41,5 +41,9 @@ sudo virt-install \
 --graphics none \
 --console pty,target.type=serial \
 --location /var/lib/libvirt/images/debian-13.1.0-amd64-netinst.iso \
---extra-args 'console=ttyS0,115200n8 serial']
+--extra-args 'console=ttyS0,115200n8 serial'
+
+
+virsh --connect qemu:///system console debian03
+
 ```
