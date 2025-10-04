@@ -11,6 +11,14 @@
   import_tasks: rygel.yml
   tags: rygel
 
+- name: docker
+  import_tasks: docker.yml
+  tags: docker
+
+- name: owntone
+  import_tasks: owntone.yml
+  tags: owntone
+
 - name: ssh
   import_tasks: ssh.yml
   tags: ssh
