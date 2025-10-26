@@ -1,0 +1,20 @@
+- name: Ensure Samba packages are installed
+  apt:
+    name:
+      - samba
+      - samba-common
+    state: present
+    update_cache: true
+
+- name: Send config file
+  template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+    backup: true
+  notify: reload smb
+
+- name: Ensure Samba is running and set to start on boot
+  service:
+    name: smb
+    state: started
+    enabled: true

@@ -5,5 +5,6 @@
   roles:
     - programs_install
     - disk_mount
+    - samba
   become: true
   become_method: sudo
