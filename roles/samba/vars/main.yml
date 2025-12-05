@@ -1,0 +1,7 @@
+smb_shares:
+  - path: /mnt/local_toshiba/stuffs/All_Music
+    name: All_Music
+  - path: /mnt/local_toshiba/stuffs/All_Pictures
+    name: All_Pictures
+  - path: /mnt/local_toshiba/stuffs/All_Videos
+    name: All_Videos
