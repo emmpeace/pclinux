@@ -1,4 +1,28 @@
 ---
+
+- name: Check for RIKEN in the apt sources
+  shell: grep -r ftp.riken.jp /etc/apt/sources.list*
+  register: riken_check
+  ignore_errors: yes
+
+- name: Backup of apt sources
+  copy:
+    src: /etc/apt/sources.list.d/ubuntu.sources
+    dest: /etc/apt/sources.list.d/ubuntu.sources.ansible_backup
+    remote_src: yes
+    force: no
+  when: '"riken" not in riken_check.stdout'
+
+- name: Replace apt sources to RIKEN
+  replace: 
+    path: /etc/apt/sources.list.d/ubuntu.sources
+    regexp: "{{ item }}"
+    replace: ftp.riken.jp/Linux
+  with_items:
+    - jp.archive.ubuntu.com
+    - security.ubuntu.com
+  when: '"riken" not in riken_check.stdout'
+
 - name: Update all packages to their latest version
   apt:
     name: "*"

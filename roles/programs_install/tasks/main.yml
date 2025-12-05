@@ -5,7 +5,7 @@
 
 - name: Opera browser
   import_tasks: opera.yml
-  tags: basic_installs
+  tags: opera
 
 - name: Rygel
   import_tasks: rygel.yml
