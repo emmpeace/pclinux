@@ -1,0 +1,16 @@
+# necessary packages for virtualization
+
+- name: Install necessary packages for virtualization
+  apt:
+    name: {{ item }}
+    state: present
+  with_items:
+    - "qemu-kvm"
+    - "virt-manager"
+    - "libvirt-daemon-system"
+    - "libvirt-clients"
+    - "virtinst"
+    - "libosinfo-bin"
+    - "genisoimage"
+    - "cpu-checker"
+    - "guestfs-tools"

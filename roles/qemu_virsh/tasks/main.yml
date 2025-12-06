@@ -1,0 +1,7 @@
+- name: install qemu packages
+  import_tasks: install_qemu.yml
+  tags: install_qemu
+
+- name: Provide VMs
+  import_tasks: provide_vm.yml
+  tags: provide_vm
