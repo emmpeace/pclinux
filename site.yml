@@ -3,8 +3,10 @@
     - my_hosts
     - localhost
   roles:
-    - programs_install
-    - disk_mount
-    - samba
+    - role: programs_install
+    - role: disk_mount
+    - role: samba
+    - role: qemu_virsh
+      tags: qemu
   become: true
   become_method: sudo

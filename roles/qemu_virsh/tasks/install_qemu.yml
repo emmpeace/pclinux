@@ -1,8 +1,9 @@
+---
 # necessary packages for virtualization
 
 - name: Install necessary packages for virtualization
   apt:
-    name: {{ item }}
+    name: "{{ item }}"
     state: present
   with_items:
     - "qemu-kvm"
