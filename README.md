@@ -45,9 +45,19 @@ cd pclinux
 ansible-playbook site.yml -K
 
 ```
-note for dvd playing
+## Note for dvd playing
 ```
 sudo apt install vlc
 sudo apt install libdvd-pkg
 sudo dpkg-reconfigure libdvd-pkg
+```
+## Note for bluray playing
+
+```
+sudo apt install libaacs0 libbluray-bdj libbluray2
+```
+Download KEYDB.CFG
+```
+http://fvonline-db.bplaced.net/fv_download.php?lang=eng
+http://fvonline-db.bplaced.net/
 ```
