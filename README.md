@@ -54,10 +54,15 @@ sudo dpkg-reconfigure libdvd-pkg
 ## Note for bluray playing
 
 ```
+## install required packages
 sudo apt install libaacs0 libbluray-bdj libbluray2
-```
-Download KEYDB.CFG
-```
+
+## Download KEYDB.CFG from site below
 http://fvonline-db.bplaced.net/fv_download.php?lang=eng
 http://fvonline-db.bplaced.net/
+
+## Copy to designated repository
+mkdir ~/.config/aacs
+cp Downloads/keydb_jpn/keydb.cfg /home/emm/.config/aacs/KEYDB.cfg
+
 ```
