@@ -45,3 +45,9 @@ cd pclinux
 ansible-playbook site.yml -K
 
 ```
+note for dvd playing
+```
+sudo apt install vlc
+sudo apt install libdvd-pkg
+sudo dpkg-reconfigure libdvd-pkg
+```
