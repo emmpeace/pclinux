@@ -66,3 +66,10 @@ mkdir ~/.config/aacs
 cp Downloads/keydb_jpn/keydb.cfg /home/emm/.config/aacs/KEYDB.cfg
 
 ```
+## Some nice projects
+```
+Copy party
+https://github.com/9001/copyparty/releases/latest/download/copyparty-sfx.py
+yt-dlp
+https://github.com/yt-dlp/yt-dlp/releases
+```
