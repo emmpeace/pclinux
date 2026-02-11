@@ -72,4 +72,6 @@ Copy party
 https://github.com/9001/copyparty/releases/latest/download/copyparty-sfx.py
 yt-dlp
 https://github.com/yt-dlp/yt-dlp/releases
+Syncthing
+https://syncthing.net/
 ```
