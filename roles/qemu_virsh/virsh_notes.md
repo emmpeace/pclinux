@@ -73,3 +73,48 @@ virt-sparsify --in-place /var/lib/libvirt/images/debian01_cp.qcow2
 is the drive still usable ? 
 
 it seems like we can use qemu-img with the -c otpion, this will compress the whole disk work only with qcow2
+
+
+references:
+https://documentation.ubuntu.com/public-images/public-images-how-to/launch-with-libvirt/
+https://www.redhat.com/en/blog/build-VM-fast-ansible
+https://www.redhat.com/en/blog/build-lab-quickly
+
+---
+
+This worked on ubuntu 24
+Ref: https://documentation.ubuntu.com/public-images/public-images-how-to/launch-with-libvirt/
+
+cp noble-server-cloudimg-amd64.img my_noble.img
+
+cat > user-data.yaml <<EOF
+#cloud-config
+password: password
+chpasswd:
+  expire: False
+ssh_pwauth: True
+EOF
+
+cat user-data.yaml
+
+cloud-localds my_noble_seed.img user-data.yaml
+
+qemu-system-x86_64  \
+  -cpu host -machine type=q35,accel=kvm -m 2048 \
+  -nographic \
+  -netdev id=net00,type=user,hostfwd=tcp::2222-:22 \
+  -device virtio-net-pci,netdev=net00 \
+  -drive if=virtio,format=qcow2,file=my_noble.img \
+  -drive if=virtio,format=raw,file=my_noble_seed.img
+
+sudo cp my_noble.img /var/lib/libvirt/images/ub_01.qcow2
+
+sudo virt-install --name ub_01 \
+--memory 2048 \
+--vcpus 2 \
+--import \
+--disk path=/var/lib/libvirt/images/ub_01.qcow2,size=10 \
+--network network=default \
+--osinfo generic \
+--graphics none \
+--console pty,target_type=serial

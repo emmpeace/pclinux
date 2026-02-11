@@ -1,0 +1,21 @@
+---
+- name: Copy image file
+  shell: cp /var/lib/libvirt/images/noble-server-cloudimg-amd64.img /var/lib/libvirt/images/ub_01.qcow2
+
+- name: Customize image
+  shell: |
+    virt-customize -a /var/lib/libvirt/images/ub_01.qcow2 \
+    --hostname ub_01 \
+    --root-password password:password
+
+- name: Create Create vm from image
+  shell: |
+    virt-install --name ub_01 \
+    --memory 2048 \
+    --vcpus 2 \
+    --import \
+    --disk path=/var/lib/libvirt/images/ub_01.qcow2,size=10 \
+    --network network=default \
+    --osinfo generic \
+    --graphics vnc,listen=0.0.0.0 \
+    --noautoconsole

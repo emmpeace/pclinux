@@ -1,0 +1,12 @@
+---
+- name: install qemu packages
+  import_tasks: install_qemu.yml
+  tags: install_qemu
+
+- name: Download image files
+  import_tasks: image_download.yml
+  tags: image_download
+
+- name: Provide VMs
+  import_tasks: vm_provision.yml
+  tags: vm_provision
