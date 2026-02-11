@@ -70,8 +70,13 @@ cp Downloads/keydb_jpn/keydb.cfg /home/emm/.config/aacs/KEYDB.cfg
 ```
 Copy party
 https://github.com/9001/copyparty/releases/latest/download/copyparty-sfx.py
+Party up (Copyparty for Android)
+https://github.com/9001/party-up
+
 yt-dlp
 https://github.com/yt-dlp/yt-dlp/releases
+
 Syncthing
 https://syncthing.net/
+https://github.com/researchxxl/syncthing-android
 ```
