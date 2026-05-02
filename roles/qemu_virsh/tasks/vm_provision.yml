@@ -1,21 +1,37 @@
----
+- name: Check defined VMs
+  shell: virsh list --all --name
+  register: vms
+  changed_when: false
+
 - name: Copy image file
-  shell: cp /var/lib/libvirt/images/noble-server-cloudimg-amd64.img /var/lib/libvirt/images/ub_01.qcow2
+  command: cp -n /var/lib/libvirt/images/templates/{{ item.vm_name }} /var/lib/libvirt/images/{{ item.vm_name }}.qcow2
+  when: item.vm_name not in vms.stdout_lines
+  with_items:
+    - "{{ ubuntu_24 }}"
+    - "{{ ubuntu_26 }}"
 
 - name: Customize image
   shell: |
-    virt-customize -a /var/lib/libvirt/images/ub_01.qcow2 \
-    --hostname ub_01 \
+    virt-customize -a /var/lib/libvirt/images/{{ item.vm_name }}.qcow2 \
+    --hostname {{ item.vm_name }} \
     --root-password password:password
+  when: item.vm_name not in vms.stdout_lines
+  with_items:
+    - "{{ ubuntu_24 }}"
+    - "{{ ubuntu_26 }}"
 
-- name: Create Create vm from image
+- name: Create VM from image
   shell: |
-    virt-install --name ub_01 \
+    virt-install --name {{ item.vm_name }} \
     --memory 2048 \
     --vcpus 2 \
     --import \
-    --disk path=/var/lib/libvirt/images/ub_01.qcow2,size=10 \
+    --disk path=/var/lib/libvirt/images/{{ item.vm_name }}.qcow2,size=10 \
     --network network=default \
     --osinfo generic \
     --graphics vnc,listen=0.0.0.0 \
     --noautoconsole
+  when: item.vm_name not in vms.stdout_lines
+  with_items:
+    - "{{ ubuntu_24 }}"
+    - "{{ ubuntu_26 }}"

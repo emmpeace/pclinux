@@ -1,4 +1,12 @@
+- name: Create templates directory
+  ansible.builtin.file:
+    path: /var/lib/libvirt/images/templates/
+    state: directory
+
 - name: Download VM img file
   get_url: 
-    url: https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
-    dest: /var/lib/libvirt/images/
+    url: "{{ item.url }}"
+    dest: /var/lib/libvirt/images/templates/{{ item.vm_name }}
+  with_items:
+    - "{{ ubuntu_24 }}"
+    - "{{ ubuntu_26 }}"
