@@ -25,3 +25,10 @@ owntone_gid: "1001"
 media_path: "/srv/owntone/media"
 config_path: "/srv/owntone/config"
 database_path: "/srv/owntone/database"
+
+## qemu variables
+
+ubuntu_24: 
+ - { url: "https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img" , vm_name: "u24" }
+ubuntu_26:
+ - { url: "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img" , vm_name: "u26" }
