@@ -16,3 +16,4 @@
     - "cpu-checker"
     - "guestfs-tools"
     - "cloud-image-utils"
+    - "bridge-utils"

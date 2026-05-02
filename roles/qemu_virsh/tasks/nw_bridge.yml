@@ -1,0 +1,33 @@
+- name: Install bridge-utils
+  apt:
+    name: bridge-utils
+    state: present
+
+- name: Deploy Netplan configuration
+  template:
+    src: 01-netcfg.yaml.j2
+    dest: /etc/netplan/01-netcfg.yaml
+    mode: '0600'
+  register: netplan_config
+
+- name: Apply Netplan configuration
+  command: netplan apply
+  when: netplan_config.changed
+
+- name: Create libvirt XML for the bridge
+  copy:
+    dest: /tmp/bridge.xml
+    content: |
+      <network>
+        <name>{{ bridge_name }}</name>
+        <forward mode='bridge'/>
+        <bridge name='{{ bridge_name }}'/>
+      </network>
+
+- name: Define and start libvirt bridge network
+  community.libvirt.virt_net:
+    command: define
+    name: "{{ bridge_name }}"
+    xml: "{{ lookup('file', '/tmp/bridge.xml') }}"
+    autostart: yes
+    state: active

@@ -32,3 +32,16 @@ ubuntu_24:
  - { url: "https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img" , vm_name: "u24" }
 ubuntu_26:
  - { url: "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img" , vm_name: "u26" }
+
+## qemu network variables
+qemu_ext_nw:
+  bridge_name: br0
+  physical_nic: enp0s3  # <-- CHANGE THIS to your actual interface
+  bridge_ip: 192.168.1.50/24
+  gateway: 192.168.1.1
+  nameservers: [8.8.8.8, 8.8.4.4]
+
+qemu_int_nw:
+  bridge_name: br1
+  bridge_ip: 10.1.1.20/24
+  gateway: 10.1.1.1
