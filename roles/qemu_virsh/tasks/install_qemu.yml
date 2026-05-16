@@ -17,3 +17,5 @@
     - "guestfs-tools"
     - "cloud-image-utils"
     - "bridge-utils"
+    - "python3-lxml"
+    - "python3-libvirt"

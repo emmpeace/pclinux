@@ -42,6 +42,6 @@ qemu_ext_nw:
   nameservers: [8.8.8.8, 8.8.4.4]
 
 qemu_int_nw:
-  bridge_name: br1
+  bridge_name: virint0
   bridge_ip: 10.1.1.20/24
   gateway: 10.1.1.1

@@ -1,12 +1,7 @@
-- name: Install bridge-utils
-  apt:
-    name: bridge-utils
-    state: present
-
 - name: Deploy Netplan configuration
   template:
-    src: 01-netcfg.yaml.j2
-    dest: /etc/netplan/01-netcfg.yaml
+    src: 01-netcfg_virint0.yaml.j2
+    dest: /etc/netplan/01-netcfg_virint0.yaml
     mode: '0600'
   register: netplan_config
 
@@ -19,15 +14,15 @@
     dest: /tmp/bridge.xml
     content: |
       <network>
-        <name>{{ bridge_name }}</name>
+        <name>{{ qemu_int_nw.bridge_name }}</name>
         <forward mode='bridge'/>
-        <bridge name='{{ bridge_name }}'/>
+        <bridge name='{{ qemu_int_nw.bridge_name }}'/>
       </network>
 
 - name: Define and start libvirt bridge network
   community.libvirt.virt_net:
     command: define
-    name: "{{ bridge_name }}"
+    name: "{{ qemu_int_nw.bridge_name }}"
     xml: "{{ lookup('file', '/tmp/bridge.xml') }}"
     autostart: yes
     state: active
