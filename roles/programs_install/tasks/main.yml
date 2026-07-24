@@ -26,3 +26,7 @@
 - name: ipv6_disable
   import_tasks: ipv6_disable.yml
   tags: ipv6_disable
+
+- name: syncthing
+  import_tasks: syncthing.yml
+  tags: syncthing

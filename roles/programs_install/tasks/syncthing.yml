@@ -1,0 +1,15 @@
+- name: Download syncthing gpg key
+  get_url:
+    url: https://syncthing.net/release-key.gpg
+    dest: /etc/apt/keyrings/syncthing-archive-keyring.gpg
+    checksum: sha256:c38853d2ccb890ae428e1fbf05d8c8fe0ba6f560bd050e161fb4e5324cdb4a9b
+
+- name: Set Sources list for syncthing
+  copy: 
+    src: syntching.list
+    dest: /etc/apt/sources.list.d/syncthing.list
+
+- name: Install syncthing
+  apt:
+    name: syncthing
+    state: present
