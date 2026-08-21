@@ -10,3 +10,7 @@
 - name: Provide VMs
   import_tasks: vm_provision.yml
   tags: vm_provision
+
+- name: Network bridge
+  import_tasks: nw_bridge.yml
+  tags: nw_bridge

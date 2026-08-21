@@ -1,0 +1,28 @@
+- name: Deploy Netplan configuration
+  template:
+    src: 01-netcfg_virint0.yaml.j2
+    dest: /etc/netplan/01-netcfg_virint0.yaml
+    mode: '0600'
+  register: netplan_config
+
+- name: Apply Netplan configuration
+  command: netplan apply
+  when: netplan_config.changed
+
+- name: Create libvirt XML for the bridge
+  copy:
+    dest: /tmp/bridge.xml
+    content: |
+      <network>
+        <name>{{ qemu_int_nw.bridge_name }}</name>
+        <forward mode='bridge'/>
+        <bridge name='{{ qemu_int_nw.bridge_name }}'/>
+      </network>
+
+- name: Define and start libvirt bridge network
+  community.libvirt.virt_net:
+    command: define
+    name: "{{ qemu_int_nw.bridge_name }}"
+    xml: "{{ lookup('file', '/tmp/bridge.xml') }}"
+    autostart: yes
+    state: active

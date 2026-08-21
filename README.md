@@ -33,16 +33,16 @@ https://askubuntu.com/questions/1401737/couldnt-create-moklist-volume-full-grub-
 https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu<br>
 ```
 sudo apt update
-sudo apt install software-properties-common
+sudo apt install -y software-properties-common
 sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt install ansible
+sudo apt install -y ansible ssh
 ansible-galaxy collection install community.docker
 ```
 
 ```
 git clone https://github.com/emmpeace/pclinux.git
 cd pclinux
-ansible-playbook site.yml -K
+ansible-playbook site.yml -i inventory/all localhost -k -K
 
 ```
 ## Note for dvd playing

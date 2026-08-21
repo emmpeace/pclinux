@@ -1,0 +1,9 @@
+network:
+  version: 2
+  renderer: networkd
+  bridges:
+    {{ qemu_int_nw.bridge_name }}:
+      addresses: [{{ qemu_int_nw.bridge_ip }}]
+      parameters:
+        stp: true
+        forward-delay: 0
