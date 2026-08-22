@@ -6,6 +6,11 @@ OK, trying to play with guestfs in a VM
 4. mount VM1 image  to VM2
 4. check files in VM1 from VM2
 
+Ansible command 
+```
+ansible-playbook site.yml -K -t qemu -l localhost -i inventory/all
+```
+
 commands notes 
 
 
@@ -59,7 +64,11 @@ unmount disk on host
 ```
 virsh detach-disk ubuntu01 vdb
 ```
-
+Check IP
+```
+virsh net-dhcp-leases default
+virsh domifaddr u24
+```
 
 bonus 
 - virt-sparsify: delete free space from vm disk

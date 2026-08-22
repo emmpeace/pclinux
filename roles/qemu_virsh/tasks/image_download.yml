@@ -10,3 +10,4 @@
   with_items:
     - "{{ ubuntu_24 }}"
     - "{{ ubuntu_26 }}"
+    - "{{ centos_10 }}"
