@@ -1,0 +1,34 @@
+---
+- name: Ensure required system audio dependencies are installed (Debian/Ubuntu)
+  ansible.builtin.apt:
+    name:
+      - curl
+      - mpv
+      - ffmpeg
+    state: present
+    update_cache: yes
+
+- name: Get latest CLIAMP release tag from GitHub API
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/bjarneo/cliamp/releases/latest
+    return_content: yes
+  register: cliamp_latest_json
+
+- name: Download CLIAMP binary archive using fetched tag
+  ansible.builtin.get_url:
+    url: "https://github.com/bjarneo/cliamp/releases/download/{{ cliamp_latest_json.json.tag_name }}/cliamp-linux-amd64"
+    dest: "/tmp/cliamp"
+    mode: '0644'
+
+- name: Extract CLIAMP binary to installation path
+  ansible.builtin.copy:
+    src: "/tmp/cliamp"
+    dest: "/usr/local/bin"
+    remote_src: yes
+    mode: '0755'
+    creates: "/usr/local/bin/cliamp"
+
+- name: Clean up temporary installer file
+  ansible.builtin.file:
+    path: "/tmp/cliamp"
+    state: absent

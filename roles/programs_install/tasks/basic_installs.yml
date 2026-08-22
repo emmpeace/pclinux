@@ -64,6 +64,5 @@
     - "rygel"
     - "ibus-mozc"
     - "ubuntu-restricted-extras"
-
-
-
+    - "gnome-shell-extension-gpaste"
+    - "gpaste-2"

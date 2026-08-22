@@ -30,3 +30,7 @@
 - name: syncthing
   import_tasks: syncthing.yml
   tags: syncthing
+
+- name: cliamp
+  import_tasks: cliamp.yml
+  tags: cliamp
