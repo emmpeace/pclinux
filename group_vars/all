@@ -29,9 +29,11 @@ database_path: "/srv/owntone/database"
 ## qemu variables
 
 ubuntu_24: 
- - { url: "https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img" , vm_name: "u24" }
+ - { url: "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img" , vm_name: "u24" }
 ubuntu_26:
- - { url: "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img" , vm_name: "u26" }
+ - { url: "https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img" , vm_name: "u26" }
+centos_10:
+ - { url: "https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-10-latest.x86_64.qcow2" , vm_name: "c10" }
 
 ## qemu network variables
 qemu_ext_nw:

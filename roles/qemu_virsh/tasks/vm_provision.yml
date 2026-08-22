@@ -9,16 +9,21 @@
   with_items:
     - "{{ ubuntu_24 }}"
     - "{{ ubuntu_26 }}"
+    - "{{ centos_10 }}"
 
 - name: Customize image
   shell: |
     virt-customize -a /var/lib/libvirt/images/{{ item.vm_name }}.qcow2 \
     --hostname {{ item.vm_name }} \
-    --root-password password:password
+    --root-password password:password123 \
+    --run-command "useradd -m -s /bin/bash emm" \
+    --password "emm:password:password123"
+
   when: item.vm_name not in vms.stdout_lines
   with_items:
     - "{{ ubuntu_24 }}"
     - "{{ ubuntu_26 }}"
+    - "{{ centos_10 }}"
 
 - name: Create VM from image
   shell: |
@@ -35,3 +40,4 @@
   with_items:
     - "{{ ubuntu_24 }}"
     - "{{ ubuntu_26 }}"
+    - "{{ centos_10 }}"

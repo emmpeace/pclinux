@@ -14,9 +14,9 @@
     dest: /tmp/bridge.xml
     content: |
       <network>
-        <name>{{ qemu_int_nw.bridge_name }}</name>
+        <name>"{{ qemu_int_nw.bridge_name }}"</name>
         <forward mode='bridge'/>
-        <bridge name='{{ qemu_int_nw.bridge_name }}'/>
+        <bridge name='"{{ qemu_int_nw.bridge_name }}"'/>
       </network>
 
 - name: Define and start libvirt bridge network
